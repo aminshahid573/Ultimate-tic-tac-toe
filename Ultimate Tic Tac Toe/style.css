@@ -1,150 +1,247 @@
-/* Reset some default styles */
+/* Color Palette */
+:root {
+  --color-bg: #DFCCFB;
+  --color-primary: #DFCCFB;
+  --color-secondary: #D0BFFF;
+  --color-accent: #BEADFA;
+  --color-text: #333;
+  --color-button: #3b82f6;
+  --color-button-hover: #2563eb;
+  --color-popup-bg: #ffffff;
+  --color-popup-btn: #10b981;
+  --color-popup-btn-hover: #059669;
+  --color-cell-bg: #e5e7eb;
+  --color-cell-hover: #d1d5db;
+  --color-won: #10b981;
+  --color-highlight: #f59e0b;
+  --color-shadow: rgba(0, 0, 0, 0.05);
+}
+
+/* General reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 body, html {
-    margin: 0;
-    padding: 0;
-    height: 100%;
-    font-family: 'Arial', sans-serif;
-    background-color: #f7f7f7;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  body {
-    /* background-color: #333; */
-  }
-  
-  .player-info, .game-container {
-    background-color: white;
-    padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
-    text-align: center;
-  }
-  
-  h1, h2 {
-    color: #333;
-  }
-  
-  h3 {
-    margin: 10px 0;
-    font-size: 1.2rem;
-  }
-  
-  input {
-    margin: 10px;
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    width: 200px;
-  }
-  
-  button {
-    padding: 12px 24px;
-    font-size: 16px;
-    cursor: pointer;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
-    transition: all 0.2s ease;
-  }
-  
-  button:hover {
-    background-color: #0056b3;
-  }
-  
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: var(--color-bg);
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 20px;
+}
+
+h1, h2 {
+  color: var(--color-text);
+}
+
+h3 {
+  font-size: 1.5rem;
+  margin-bottom: 15px;
+}
+
+button {
+  padding: 12px 24px;
+  font-size: 18px;
+  color: white;
+  background-color: var(--color-button);
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: var(--color-button-hover);
+}
+
+/* Game Container */
+.player-info, .game-container {
+  background-color: #BEADFA;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0px 4px 10px var(--color-shadow);
+  text-align: center;
+  width: 100%;
+  max-width: 900px;
+  margin: 20px auto;
+}
+
+h1 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+
+/* Main Board */
+.main-board {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 5px;
+  margin: 30px auto;
+  width: 100%;
+  max-width: 700px;
+}
+
+/* Sub-board style */
+.sub-board {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 4px;
+  background-color: #DFCCFB;
+  border-radius: 10px;
+  padding: 10px;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.sub-board:hover {
+  background-color: var(--color-primary);
+}
+
+/* Cell Style */
+.cell {
+  position: relative;
+  width: 44px;
+  height: 44px;
+  background-color: var(--color-cell-bg);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.cell:hover {
+  background-color: var(--color-cell-hover);
+}
+
+.cell span {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 36px;
+  color: var(--color-text);
+}
+
+/* Winning Board Style */
+.won {
+  font-size: 64px;
+  color: var(--color-won);
+  font-weight: bold;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--color-primary);
+}
+
+/* Highlight the active board */
+.highlight {
+  border: 3px solid var(--color-highlight);
+  box-shadow: 0 0 15px rgba(245, 158, 11, 0.6);
+}
+
+/* Popup styles */
+.popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  visibility: hidden;
+  z-index: 10;
+}
+
+.popup.active {
+  visibility: visible;
+}
+
+.popup-content {
+  background-color: var(--color-popup-bg);
+  padding: 20px; /* Adjusted for smaller screens */
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  width: 90%; /* Adjusted for smaller screens */
+  max-width: 400px; /* Adjusted for smaller screens */
+}
+
+.popup-content h2 {
+  margin-bottom: 15px; /* Adjusted for smaller screens */
+}
+
+.popup-content button {
+  background-color: var(--color-popup-btn);
+}
+
+.popup-content button:hover {
+  background-color: var(--color-popup-btn-hover);
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
   .main-board {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    max-width: 600px;
     gap: 15px;
-    margin: 20px 0;
   }
-  
+
   .sub-board {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 5px;
-    border: 3px solid #333;
-    border-radius: 8px;
-    padding: 10px;
-    background-color: #fff;
-    transition: transform 0.2s ease;
+    padding: 8px;
   }
-  
-  .sub-board:hover {
-    transform: scale(1.02);
-  }
-  
-  .cell {
-    width: 50px;
-    height: 50px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border: 2px solid #ccc;
-    font-size: 24px;
-    background-color: #f2f2f2;
-    transition: background-color 0.2s ease;
-    cursor: pointer;
-  }
-  
-  .cell:hover {
-    background-color: #e0e0e0;
-  }
-  
+
   .won {
-    font-size: 50px;
-    color: #007bff;
-    font-weight: bold;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    font-size: 56px;
   }
-  
-  .highlight {
-    border: 3px solid #ff4500;
-    box-shadow: 0 0 10px #ff4500;
+}
+
+@media (max-width: 768px) {
+  .main-board {
+    max-width: 500px;
+    gap: 12px;
   }
-  
-  /* Popup Styles */
-  .popup {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0, 0, 0, 0.7);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    visibility: hidden;
+
+  .sub-board {
+    padding: 6px;
   }
-  
-  .popup.active {
-    visibility: visible;
+
+  .won {
+    font-size: 48px;
   }
-  
+}
+
+@media (max-width: 480px) {
+  .main-board {
+    max-width: 380px;
+    gap: 4px;
+  }
+
+  .sub-board {
+    padding: 4px;
+  }
+
+  .cell span {
+    font-size: 28px;
+  }
+
+  .won {
+    font-size: 40px;
+  }
+
   .popup-content {
-    background-color: white;
-    padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
-    text-align: center;
-    width: 300px;
+    padding: 20px;
+    max-width: 300px;
   }
-  
-  .popup-content h2 {
-    margin-bottom: 20px;
-  }
-  
-  .popup-content button {
-    background-color: #28a745;
-  }
-  
-  .popup-content button:hover {
-    background-color: #218838;
-  }
-  
+}
